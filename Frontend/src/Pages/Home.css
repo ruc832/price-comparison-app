@@ -1,0 +1,40 @@
+.home{
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.home h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+.home input {
+    width: 60%;
+    max-width: 400px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #999;
+  }
+
+.home button{
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+@media screen and (max-width: 600px) {
+    .home input {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  
+    .home button {
+      width: 100%;
+    }
+}  
