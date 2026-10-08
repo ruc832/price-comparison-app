@@ -14,6 +14,7 @@ const getCromaData = async (product) => {
     });
 
     const $ = cheerio.load(data);
+
     const firstProduct = $(".product-title").first();
     const title = firstProduct.text().trim();
 
@@ -37,5 +38,6 @@ const getCromaData = async (product) => {
     };
   }
 };
-
+console.log("Croma page title:", $("title").text());
+console.log("Croma matches:", $(".product-title").length);
 module.exports = getCromaData;
