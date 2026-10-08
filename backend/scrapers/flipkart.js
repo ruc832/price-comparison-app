@@ -23,6 +23,8 @@ async function getFlipkartData(product) {
     // const link = "https://www.flipkart.com" + firstItem.find("a._1fQZEK").attr("href");
     const href = firstItem.find("a._1fQZEK").attr("href");
     const link = href ? new URL(href, "https://www.flipkart.com").href : null;
+    require("fs").writeFileSync("/tmp/flipkart-debug.html", data);
+    console.log("Flipkart HTML sample:", $.html("body").slice(0, 1500));
     console.log("Flipkart page title:", $("title").text());
     console.log("Flipkart matches:", $("div._4rR01T").length);
     return {
