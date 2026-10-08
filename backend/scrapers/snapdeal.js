@@ -2,7 +2,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 const getSnapdealData = async (product) => {
-  const query = product.split(" ").join("%20");
+  // const query = product.split(" ").join("%20");
+  const query = encodeURIComponent(product.trim());
   const url = `https://www.snapdeal.com/search?keyword=${query}`;
 
   try {

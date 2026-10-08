@@ -1,16 +1,17 @@
-const axios=require("axios");
-const cheerio=require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-async function getFlipkartData(product){
-    const query = product.replace(" ", "+"); 
-    const url=`https://www.flipkart.com/search?q=${query}`;
+async function getFlipkartData(product) {
+  // const query = product.replace(" ", "+");
+  const query = encodeURIComponent(product.trim());
+  const url = `https://www.flipkart.com/search?q=${query}`;
 
-    const headers = {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/117.0.0.0 Safari/537.36",
-    };
+  const headers = {
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/117.0.0.0 Safari/537.36",
+  };
 
-try{
+  try {
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
@@ -19,15 +20,16 @@ try{
 
     const title = firstItem.find("div._4rR01T").text().trim();
     const price = firstItem.find("div._30jeq3").text().trim();
-    const link = "https://www.flipkart.com" + firstItem.find("a._1fQZEK").attr("href");
-
+    // const link = "https://www.flipkart.com" + firstItem.find("a._1fQZEK").attr("href");
+    const href = firstItem.find("a._1fQZEK").attr("href");
+    const link = href ? new URL(href, "https://www.flipkart.com").href : null;
     return {
       source: "Flipkart",
       title: title || "Not Found",
       price: price || "Not Found",
-      link: link || "#",
+      link: link,
     };
-    } catch (error) {
+  } catch (error) {
     console.error("Flipkart scraping failed:", error.message);
     return {
       source: "Flipkart",

@@ -2,7 +2,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 const getCromaData = async (product) => {
-  const query = product.split(" ").join("%20");
+  // const query = product.split(" ").join("%20");
+  const query = encodeURIComponent(product.trim());
   const url = `https://www.croma.com/search/?text=${query}`;
 
   try {
@@ -15,7 +16,9 @@ const getCromaData = async (product) => {
     const $ = cheerio.load(data);
     const firstProduct = $(".product-title").first();
     const title = firstProduct.text().trim();
-    const link = "https://www.croma.com" + firstProduct.attr("href");
+
+    const href = firstProduct.attr("href");
+    const link = href ? new URL(href, "https://www.croma.com").href : null;
     const price = $(".pdpPrice").first().text().trim() || "Not Found";
 
     return {
