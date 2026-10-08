@@ -1,0 +1,24 @@
+/* GSAP-friendly base styles */
+
+.product-card {
+  will-change: transform, box-shadow;
+}
+
+/* Optional: smooth font rendering */
+.product-card h3,
+.product-card p,
+.product-card a {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Optional button polish */
+.product-card a {
+  text-decoration: none;
+}
+
+/* Mobile safe spacing */
+@media (max-width: 640px) {
+  .product-card {
+    padding: 14px;
+  }
+}
