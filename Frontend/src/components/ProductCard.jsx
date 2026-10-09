@@ -1,21 +1,36 @@
-import { useEffect,useRef } from "react";
+import { useEffect, useRef } from "react";
 import React from "react";
 import gsap from "gsap";
 import "./productcard.css";
 
-const ProductCard=({item})=>{
+const ProductCard = ({ item }) => {
   const cardRef = useRef(null);
 
   // 🔹 Entry animation
+  // useEffect(() => {
+  //   gsap.from(cardRef.current, {
+  //     y: 40,
+  //     opacity: 0,
+  //     duration: 0.6,
+  //     ease: "power3.out",
+  //   });
+  // }, []);
   useEffect(() => {
-    gsap.from(cardRef.current, {
-      y: 40,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    });
-  }, []);
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cardRef.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+      );
+    }, cardRef);
 
+    return () => ctx.revert();
+  }, []);
   // 🔹 Hover animations
   const handleEnter = () => {
     gsap.to(cardRef.current, {
@@ -69,4 +84,3 @@ const ProductCard=({item})=>{
 };
 
 export default ProductCard;
-    

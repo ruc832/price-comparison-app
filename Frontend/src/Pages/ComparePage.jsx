@@ -20,7 +20,7 @@ const ComparePage = () => {
 
       try {
         const res = await fetch(
-          `https://price-comparison-app-g8bc.onrender.com/compare?product=${encodeURIComponent(product || "")}`,
+          `http://localhost:4000/compare?product=${encodeURIComponent(product || "")}`,
           { signal: controller.signal },
         );
 
@@ -66,7 +66,8 @@ const ComparePage = () => {
 
       <div className="text-center mb-6">
         <button
-          onClick={() => navigate("/compare")}
+          // onClick={() => navigate("/compare")}
+          onClick={() => navigate("/")}
           className="text-sm text-red-600 border border-red-600 px-3 py-1 rounded hover:bg-red-600 hover:text-white transition"
         >
           Clear
