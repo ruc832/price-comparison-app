@@ -20,7 +20,8 @@ const ComparePage = () => {
 
       try {
         const res = await fetch(
-          `http://localhost:4000/compare?product=${encodeURIComponent(product || "")}`,
+          // `http://localhost:4000/compare?product=${encodeURIComponent(product || "")}`,
+          `https://price-comparison-app-g8bc.onrender.com/compare?product=${encodeURIComponent(product || "")}`,
           { signal: controller.signal },
         );
 
